@@ -1,0 +1,25 @@
+package controller;
+
+import model.SurveyData;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+
+@WebServlet(name = "ControllerServlet", value = "/ControllerServlet")
+public class ControllerServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        SurveyData surveyData = new SurveyData();
+        surveyData.setFullName(request.getParameter("namaLengkap"));
+        surveyData.setProLangList(request.getParameterValues("bhsProgram"));
+        request.setAttribute("surveyData", surveyData);
+        request.getRequestDispatcher("output.jsp").forward(request, response);
+    }
+}
